@@ -1,0 +1,45 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      background: transparent;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+    }
+    #frage {
+      font-size: 2em;
+      margin-top: 50px;
+    }
+    .antwort {
+      margin: 10px;
+      padding: 15px;
+      background: #222;
+      border-radius: 10px;
+      font-size: 1.5em;
+    }
+  </style>
+</head>
+<body>
+  <div id="frage">Frage wird geladen...</div>
+  <div class="antwort" id="a"></div>
+  <div class="antwort" id="b"></div>
+  <div class="antwort" id="c"></div>
+  <div class="antwort" id="d"></div>
+
+  <script>
+    async function ladeFrage() {
+      const res = await fetch("https://USERNAME.github.io/quiz-overlay/quiz.json");
+      const data = await res.json();
+      document.getElementById("frage").innerText = data.frage;
+      document.getElementById("a").innerText = "A: " + data.a;
+      document.getElementById("b").innerText = "B: " + data.b;
+      document.getElementById("c").innerText = "C: " + data.c;
+      document.getElementById("d").innerText = "D: " + data.d;
+    }
+    ladeFrage();
+    setInterval(ladeFrage, 5000);
+  </script>
+</body>
+</html>
